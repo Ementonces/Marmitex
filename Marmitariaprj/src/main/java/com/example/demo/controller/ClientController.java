@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.model.Client;
-import com.example.demo.model.LoggedClient;
 import com.example.demo.service.ClientService;
 
 @Controller
@@ -52,7 +51,6 @@ public class ClientController{
     for (Client i : clients) {
       if (i.getEmail().equals(client.getEmail()) && i.getPassword().equals(client.getPassword())){
         System.out.println(i.toString());
-        LoggedClient.setlogged(i);
         return "redirect:/produtos";
       }
       System.out.println("usuario registrado "+i.toString());
@@ -63,14 +61,12 @@ public class ClientController{
 
   @GetMapping("/logout")
   public String logout(){
-    LoggedClient.setlogged(new Client());
     return "redirect:/login";
   } 
   
   @GetMapping("/carrinho")
   public ModelAndView cart(){
     ModelAndView mv = new ModelAndView("carrinho");
-    mv.addObject("logged", LoggedClient.getlogged());
     return mv;
   }
 }
