@@ -63,6 +63,6 @@ public class Client {
   
   @Override
   public String toString(){
-    return "ID: " + this.id + " Email: " + this.email + " Endereço: " + this.adress;
+    return "ID: " + this.id + "Name: " + this.name + " Email: " + this.email + " Endereço: " + this.adress;
   }
 }

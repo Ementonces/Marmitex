@@ -5,32 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/custom.css">
-  <title>Login</title>
+  <title>Cadastro</title>
 </head>
 <body>
   <div class="d-grid bg-dark-green" style=" height: 100dvh; place-content: center;">
     <div class="rounded-4 h-auto window" style="width: 25dvw; ">
-      <div id="clientDontExist" class="bg-danger-subtle" style="display: none;">
-        <p class="m-3">Email ou Senha Invalidas</p>
-      </div>
-      <div class="m-3 mb-1 d-grid">
+      <form class="m-3 mb-0 d-grid" method="POST" action="/" th:object="${client}">
+        <div class="mb-3">
+          <label for="name" class="form-label">Nome</label>
+          <input id="name" type="text" class="form-control" name="name" th:value="${client.name}">
+        </div>
         <div class="mb-3">
           <label for="email" class="form-label">Email</label>
-          <input id="email" type="email" class="form-control" aria-describedby="emailHelp">
+          <input id="email" type="email" class="form-control" aria-describedby="emailHelp" name="email" th:value="${client.email}">
           <div id="emailHelp" class="form-text">Não Compartilharemos seu Email com ninguém</div>
         </div>
         <div class="mb-3">
-          <label for="password" class="form-label">Senha</label>
-          <input id="password" type="password" class="form-control">
+          <label for="adress" class="form-label">Endereço</label>
+          <input id="adress" type="text" class="form-control" name="adress" th:value="${client.adress}"> 
         </div>
-        <button class="btn btn-light-green border-0 my-1 text-light" onclick="verify_acount()">Entrar</button>
-      </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Senha</label>
+          <input id="password" type="password" class="form-control" name="password" th:value="${client.password}">
+        </div>
+        <button type="submit" class="btn btn-light-green border-0 my-1 text-light ">Cadastrar</button>
+      </form>
       <div class="d-flex justify-content-center mb-2">
-        <a class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover link-dark" href="/">Não tem uma Conta?</a>
+        <a class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover link-dark" href="/login">Já tem uma Conta?</a>
       </div>
     </div>
   </div>
-  <script src="js/login.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
 </html>

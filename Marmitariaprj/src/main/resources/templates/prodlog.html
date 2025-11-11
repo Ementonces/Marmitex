@@ -3,17 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Marmitaria do Zé</title>
+  <title>Document</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/custom.css">
   <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
   <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
 </head>
 <body>
-  <div th:replace="fragments/dashboard :: SideBar"></div>
+  <!-- SideBar -->
+  <div th:replace="fragments/dashboard :: SideBar"></div> 
+  <!-- SideBar -->
+    
+  <div class="p-3 position-relative" style="flex: 1; overflow: hidden;">
+    <button class="btn btn-dark-green position-absolute" style="right: 10px;">adicionar</button>
+  </div>
 
-
-  <div class="pt-4 ps-3 d-grid" style="flex: 1; overflow: hidden; grid-template-columns: 1fr 1fr 1fr 1fr;">
     <div class="pt-4 ps-3 d-grid" style="flex: 1; overflow: hidden; grid-template-columns: 1fr 1fr 1fr 1fr;">
       <div class="card mx-4 my-3" th:each="product : ${products}">
         <img src="images/placeholder.jpg" class="card-img-top" alt="...">
@@ -28,13 +32,11 @@
       </div>
       
     </div>
-  </div>
-  
-  <script>
-    const user = JSON.parse(localStorage.getItem("logged"));
-    const profile = document.getElementById("user");
-    profile.textContent = user.name;
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script>
+      const user = JSON.parse(localStorage.getItem("logged"));
+      const profile = document.getElementById("user");
+      profile.textContent = user.name;
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
-</html> 
+</html>

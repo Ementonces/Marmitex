@@ -10,36 +10,8 @@
   <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
 </head>
 <body>
-  <div class="d-flex flex-column flex-shrink-0 p-3 bg bg-light-green" style="width: 280px; height: 100dvh;">
-    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 mx-auto link-dark text-decoration-none">
-      <span class="fs-4">Menu</span> 
-    </a>
-    <hr>
-    <ul class="nav nav-pills flex-column mb-auto">
-      <li class="nav-item">
-        <a href="/produtos" class="nav-link link-dark" >
-          <i class="fi fi-rr-shopping-cart-add"></i>
-          Produtos
-        </a>
-      </li>
-      <li>
-        <a href="" class="nav-link link-light bg-dark-green" aria-current="page" style="background-color: #008000;">
-          <i class="fi fi-sr-shopping-cart"></i>
-          Carrinho
-        </a>
-      </li>
-    </ul>
-    <hr>
-    <div class="dropup">
-      <a id="user" href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"> 
-        <i class="fi fi-sr-user m-2"></i>
-        <strong>Cliente</strong>
-      </a>
-      <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="user">
-        <li class="dropdown-item"><a class="link-underline link-underline-opacity-0 link-light" href="/Clientconfig">Confirações</a></li>
-        <li class="dropdown-item"><a class="link-underline link-underline-opacity-0 link-light" href="/logout">Sair</a></li>
-      </ul>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <div th:replace="fragments/dashboard :: SideBar"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
   </body>
   </html>

@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -17,5 +18,6 @@ public class ClientService {
   }
   
   public List<Client> getAll(){return clientRepository.findAll();}
+  public Optional<Client> getById(long id){return clientRepository.findById(id);}
   public void save(Client client){clientRepository.save(client);}
 }
