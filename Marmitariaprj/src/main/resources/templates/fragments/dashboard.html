@@ -14,13 +14,13 @@
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
-        <a href="/produtos" class="nav-link link-dark" >
+        <a id="produtos" href="/produtos" class="nav-link" >
           <i class="fi fi-rr-shopping-cart-add"></i>
           Produtos
         </a>
       </li>
       <li>
-        <a href="" class="nav-link link-light bg-dark-green" aria-current="page" style="background-color: #008000;">
+        <a id="carrinho" href="/carrinho" class="nav-link">
           <i class="fi fi-sr-shopping-cart"></i>
           Carrinho
         </a>
@@ -38,21 +38,63 @@
       </ul>
     </div>
   </div>
-
-    <!--sidebar-->
-
-    <!--product card-->
-    <div class="card mx-4 my-3" th:each="product : ${products}" th:fragment="card">
-      <img src="images/placeholder.jpg" class="card-img-top" alt="...">
-      <div class="card-body d-flex flex-column">
-        <h5 class="card-title" th:text="${product.name}"></h5>
-        <hr class="mt-0">
-        <p class="card-text overflow-scroll object-fit-scale" style="height: 7rem;" th:text="${product.description}"></p>
-        <div class="d-flex justify-content-end">
-          <a href="#" class="btn btn-light-green text-light">Comprar</a>
-        </div>
+  
+  <!--sidebar-->
+  
+  <!--workers sidebar-->
+  
+  <div class="d-flex flex-column flex-shrink-0 p-3 bg bg-light-green" style="width: 280px; height: 100dvh;" th:fragment="SideBar">
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 mx-auto link-dark text-decoration-none">
+      <span class="fs-4">Menu</span> 
+    </a>
+    <hr>
+    <ul class="nav nav-pills flex-column mb-auto">
+      <li class="nav-item">
+        <a id="produtos" href="/produtos" class="nav-link" >
+          <i class="fi fi-rr-shopping-cart-add"></i>
+          Produtos
+        </a>
+      </li>
+      <li>
+        <a id="carrinho" href="/carrinho" class="nav-link">
+          <i class="fi fi-sr-shopping-cart"></i>
+          Carrinho
+        </a>
+      </li>
+    </ul>
+    <hr>
+    <div class="dropup">
+      <a id="user" href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"> 
+        <i class="fi fi-sr-user m-2"></i>
+        <strong>Cliente</strong>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="user">
+        <li class="dropdown-item"><a class="link-underline link-underline-opacity-0 link-light" href="/Clientconfig">Confirações</a></li>
+        <li class="dropdown-item"><a class="link-underline link-underline-opacity-0 link-light" href="/logout">Sair</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <!--workers sidebar-->
+  
+  <!--product card-->
+  <div class="card mx-4 my-3" th:each="product : ${products}" th:fragment="card">
+    <img src="images/placeholder.jpg" class="card-img-top" alt="...">
+    <div class="card-body d-flex flex-column">
+      <h5 class="card-title" th:text="${product.name}"></h5>
+      <hr class="mt-0">
+      <p class="card-text overflow-scroll object-fit-scale" style="height: 7rem;" th:text="${product.description}"></p>
+      <div class="d-flex justify-content-end">
+        <a href="#" class="btn btn-light-green text-light">Comprar</a>
       </div>
     </div>
-    <!--product card-->
+  </div>
+  <!--product card-->
+  
+  <script>
+    const user = JSON.parse(localStorage.getItem("logged"));
+    const profile = document.getElementById("user");
+    profile.textContent = user.name;
+  </script>
 </body>
 </html>
