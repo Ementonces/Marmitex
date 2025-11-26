@@ -1,0 +1,45 @@
+    :root {
+      --main-green: #1e9a1e; 
+      --light-green: #c7f9cc; 
+    }
+
+    
+    body {
+      background-color: #f9fff9; 
+      font-family: "Poppins", sans-serif; 
+      color: #333; 
+    }
+
+    
+    .navbar {
+      background-color: var(--main-green); 
+    }
+
+    .navbar-brand, .nav-link {
+      color: white !important; 
+      font-weight: 500; 
+    }
+
+    .nav-link:hover {
+      text-decoration: underline; 
+    }
+
+    
+    .hero {
+      background-image: url('/images/bgfood.jpg'); 
+      background-size: cover; 
+      background-position: center; 
+      height: 70vh; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      text-align: center; 
+      color: white; 
+    }
+
+    .hero h1 {
+      background-color: rgba(25, 135, 84, 0.7); 
+      padding: 20px 40px; 
+      border-radius: 10px; 
+      font-size: 2.5rem; 
+    }
