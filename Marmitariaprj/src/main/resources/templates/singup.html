@@ -10,7 +10,7 @@
 <body>
   <div class="d-grid bg-dark-green" style=" height: 100dvh; place-content: center;">
     <div class="rounded-4 h-auto window" style="width: 25dvw; ">
-      <form class="m-3 mb-0 d-grid" method="POST" action="/" th:object="${client}">
+      <form class="m-3 mb-0 d-grid" method="POST" action="/cadastro" th:object="${client}">
         <div class="mb-3">
           <label for="name" class="form-label">Nome</label>
           <input id="name" type="text" class="form-control" name="name" th:value="${client.name}">

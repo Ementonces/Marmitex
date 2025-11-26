@@ -8,7 +8,7 @@
 <body>
   <!--sidebar-->
   <div class="d-flex flex-column flex-shrink-0 p-3 bg bg-light-green" style="width: 280px; height: 100dvh;" th:fragment="SideBar">
-    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 mx-auto link-dark text-decoration-none">
+    <a href="" class="d-flex align-items-center mb-3 mb-md-0 mx-auto link-dark text-decoration-none">
       <span class="fs-4">Menu</span> 
     </a>
     <hr>
@@ -28,9 +28,9 @@
     </ul>
     <hr>
     <div class="dropup">
-      <a id="user" href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"> 
+      <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"> 
         <i class="fi fi-sr-user m-2"></i>
-        <strong>Cliente</strong>
+        <strong id="user">Cliente</strong>
       </a>
       <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="user">
         <li class="dropdown-item"><a class="link-underline link-underline-opacity-0 link-light" href="/Clientconfig">Confirações</a></li>
@@ -43,30 +43,30 @@
   
   <!--workers sidebar-->
   
-  <div class="d-flex flex-column flex-shrink-0 p-3 bg bg-light-green" style="width: 280px; height: 100dvh;" th:fragment="SideBar">
-    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 mx-auto link-dark text-decoration-none">
+  <div class="d-flex flex-column flex-shrink-0 p-3 bg bg-light-green" style="width: 280px; height: 100dvh;" th:fragment="Wsidebar">
+    <a href="" class="d-flex align-items-center mb-3 mb-md-0 mx-auto link-dark text-decoration-none">
       <span class="fs-4">Menu</span> 
     </a>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
-        <a id="produtos" href="/produtos" class="nav-link" >
+        <a id="produtos" href="/prodlog" class="nav-link" >
           <i class="fi fi-rr-shopping-cart-add"></i>
           Produtos
         </a>
       </li>
       <li>
-        <a id="carrinho" href="/carrinho" class="nav-link">
+        <a id="funcionarios" href="/funcionarios" class="nav-link">
           <i class="fi fi-sr-shopping-cart"></i>
-          Carrinho
+          Funcionarios
         </a>
       </li>
     </ul>
     <hr>
     <div class="dropup">
-      <a id="user" href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"> 
+      <a id="worker" href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"> 
         <i class="fi fi-sr-user m-2"></i>
-        <strong>Cliente</strong>
+        <strong>funcionario</strong>
       </a>
       <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="user">
         <li class="dropdown-item"><a class="link-underline link-underline-opacity-0 link-light" href="/Clientconfig">Confirações</a></li>
@@ -91,10 +91,5 @@
   </div>
   <!--product card-->
   
-  <script>
-    const user = JSON.parse(localStorage.getItem("logged"));
-    const profile = document.getElementById("user");
-    profile.textContent = user.name;
-  </script>
 </body>
 </html>
