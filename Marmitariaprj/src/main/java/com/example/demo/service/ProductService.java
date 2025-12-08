@@ -21,6 +21,8 @@ public class ProductService {
   
   public void deleteById(Long id){ productRepository.deleteById(id); }
 
+  public Product getById(long id){return productRepository.getReferenceById(id);}
+
   public List<Product> findByIds(Iterable<Long> ids){
     return productRepository.findAllById(ids);
   }

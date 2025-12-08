@@ -6,6 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -21,15 +22,26 @@ public class Product {
   @ManyToOne
   @JoinColumn(name="order_id")
   private Order order;
+
+  @OneToOne
+  private Rating rating;
+
   public Product() {
   }
   
-  public Product(String description, String name, float price) {
-    this.description = description;
-    this.name = name;
-    this.price = price;
-  }
+
   
+  public Product(long id, String name, String description, float price, Order order, Rating rating) {
+    this.id = id;
+    this.name = name;
+    this.description = description;
+    this.price = price;
+    this.order = order;
+    this.rating = rating;
+  }
+
+
+
   public long getId() {
     return id;
   }
@@ -68,5 +80,13 @@ public class Product {
 
     public void setOrder(Order order) {
         this.order = order;
+    }
+
+    public Rating getRating() {
+      return rating;
+    }
+
+    public void setRating(Rating rating) {
+      this.rating = rating;
     }
 }

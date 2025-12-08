@@ -28,13 +28,24 @@
       </tbody>
     </table>
   </div>
-  <script th:inline="javascript">
-    /*<![CDATA[*/
-    var myJsVariable = /*[[${myThymeleafObject.property}]]*/ 'default_value';
-    // Now you can use myJsVariable in your JavaScript code
-    console.log(myJsVariable);
-    /*]]>*/
-  </script>
+
+  <button>comprar</button>
+<script th:inline="javascript">
+    // Acessando o objeto convertido
+    var usuario = JSON.parse(document.getElementById('dadosUsuario').getAttribute('th-data-usuario'));
+    console.log("Nome:", usuario.nome); // Saída: João
+
+    // Ou, diretamente em uma variável JS (mais comum)
+    var usuarioJS = /*[[${usuario}]]*/ {}; // Thymeleaf injeta o objeto aqui
+    console.log("Idade:", usuarioJS.idade); // Saída: 30
+
+    // Para listas
+    var itensJS = /*[[${listaItens}]]*/ []; // Injeta a lista
+    itensJS.forEach(function(item) {
+        console.log("Item:", item.nome, "Preço:", item.preco);
+    });
+</script>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
     crossorigin="anonymous"></script>

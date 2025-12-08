@@ -14,7 +14,6 @@ import com.example.demo.model.Worker;
 import com.example.demo.service.ProductService;
 import com.example.demo.service.WorkerService;
 
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.http.ResponseEntity;

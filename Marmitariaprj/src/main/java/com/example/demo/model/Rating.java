@@ -2,6 +2,8 @@ package com.example.demo.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.JoinColumn;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,10 +18,12 @@ public class Rating {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
+    @ElementCollection
     private List<Short> ratings = new ArrayList<>();
     @OneToOne
+    @JoinColumn(name = "product_id")
     private Product product;
-    private float value;
+    private float value = 0f;
 
     public Rating() {
     }
@@ -31,11 +35,15 @@ public class Rating {
     }
 
     public void calc() {
-        int x = 0;
-        for (Short short1 : ratings) {
-            x += short1;
+        if (ratings == null || ratings.isEmpty()) {
+            value = 0f;
+            return;
         }
-        value = x/ratings.size();
+        int sum = 0;
+        for (Short r : ratings) {
+            sum += r == null ? 0 : r;
+        }
+        value = (float) sum / (float) ratings.size();
     }
 
     public long getId() {
