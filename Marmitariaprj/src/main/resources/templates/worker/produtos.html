@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marmitaria do Zé</title>
+  <link rel="stylesheet" href="/css/style.css" th:href="@{/css/style.css}">
+  <link rel="stylesheet" href="/css/custom.css" th:href="@{/css/custom.css}">
+  <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
+  <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+</head>
+<body>
+  <main class="row row-cols-2">
+    <!-- SideBar -->
+    <div th:replace="fragments/dashboard :: Wsidebar"></div> 
+    <!-- SideBar -->
+    <div style="flex: 1;">
+      <div class="p-5 me-5 position-relative" style="flex: 1; overflow: hidden;">
+        <button class="btn btn-dark-green position-absolute text-light" style="right: 10px;" data-bs-toggle="modal" data-bs-target="#cadMarmitaModal">Adicionar</button>
+      </div>
+      
+      <div class="pt-4 ps-3 d-grid" style="flex: 1; overflow: hidden; grid-template-columns: 1fr 1fr 1fr 1fr;">
+        <div class="card mx-4 my-3" th:each="marmita : ${marmitas}" th:attr="data-id=${marmita.id}">
+          <img src="/images/placeholder.jpg" class="card-img-top" alt="..." th:src="@{/images/placeholder.jpg}">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title" th:text="${marmita.name}"></h5>
+            <hr class="mt-0">
+            <p class="card-text overflow-scroll object-fit-scale" style="height: 7rem;" th:text="${marmita.description}"></p>
+            <p th:text="${'$'+marmita.price}"></p>
+            <div class="d-flex justify-content-end">
+              <button type="button" class="btn btn-secondary text-light btn-remove" th:attr="data-id=${marmita.id}">Remover</button>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal: Cadastrar Marmita -->
+  <div class="modal fade" id="cadMarmitaModal" tabindex="-1" aria-labelledby="cadMarmitaLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="cadMarmitaLabel">Cadastrar Marmita</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form th:action="@{/worker/produtos}" th:method="post" th:object="${cadMarmita}">
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="name" class="form-label">Nome</label>
+              <input type="text" class="form-control" id="name" th:field="*{name}" required>
+            </div>
+            <div class="mb-3">
+              <label for="description" class="form-label">Descrição</label>
+              <textarea class="form-control" id="description" th:field="*{description}" rows="3"></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="price" class="form-label">Preço</label>
+              <input type="number" step="0.01" class="form-control" id="price" th:field="*{price}" required>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            <button type="submit" class="btn btn-light-green text-light">Salvar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    document.getElementById('produtos').classList.add('link-light', 'bg-dark-green');
+    document.getElementById('funcionarios').classList.add('link-dark');
+    const worker = JSON.parse(localStorage.getItem("loggedw"));
+    const profile = document.getElementById("worker");
+    profile.textContent = worker.name;
+    let nav_pill_funcionarios = document.getElementById('funcionarios');
+    if(worker.manager == true){
+      nav_pill_funcionarios.classList.add('link-dark');
+    }else{
+      nav_pill_funcionarios.style.display = 'none';
+    }
+    
+  </script>
+    <script>
+      // attach delete handlers
+      document.querySelectorAll('.btn-remove').forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+          e.preventDefault();
+          const id = btn.getAttribute('data-id');
+          if (!id) return;
+          if (!confirm('Remover este produto?')) return;
+          try {
+            const res = await fetch(`/worker/produtos/${id}`, { method: 'DELETE' });
+            if (res.status === 204 || res.ok) {
+              // remove card from DOM
+              const card = btn.closest('.card');
+              if (card) card.remove();
+            } else {
+              alert('Erro ao remover produto');
+            }
+          } catch (err) {
+            console.error(err);
+            alert('Erro ao conectar com o servidor');
+          }
+        });
+      });
+    </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>

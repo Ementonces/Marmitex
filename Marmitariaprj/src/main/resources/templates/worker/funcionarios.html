@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marmitaria do Zé</title>
+  <link rel="stylesheet" href="/css/style.css" th:href="@{/css/style.css}">
+  <link rel="stylesheet" href="/css/custom.css" th:href="@{/css/custom.css}">
+  <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
+  <link rel='stylesheet'
+    href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+</head>
+
+<body id="worker-body" style="display:none">
+  <script>
+    (function(){
+      try{
+        const w = JSON.parse(localStorage.getItem('loggedw') || 'null');
+        if (w && w.manager === true) {
+          document.getElementById('worker-body').style.display = '';
+        } else {
+          // not authorized, redirect to home (or login)
+          window.location.replace('produtos');
+        }
+      }catch(e){
+        window.location.replace('produtos');
+      }
+    })();
+  </script>
+  <main class="row row-cols-2">
+    <!-- SideBar -->
+    <div th:replace="fragments/dashboard :: Wsidebar"></div>
+    <!-- SideBar -->
+    <div style="flex: 1;">
+      <div class="p-5 me-5 position-relative" style="flex: 1; overflow: hidden;">
+        <button class="btn btn-light-green position-absolute text-light" style="right: 10px;" data-bs-toggle="modal" data-bs-target="#cadModal">Cadastrar</button>
+      </div>
+
+      <div class="ps-5 py-2">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nome</th>
+              <th scope="col">CPF</th>
+              <th scope="col">Cargo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each=" funcionario : ${funcionarios}">
+              <th th:text="${funcionario.id}"></th>
+              <td th:text="${funcionario.name}"></td>
+              <td th:text="${funcionario.cpf}"></td>
+              <td th:if="${funcionario.manager}">Gerente</td>
+              <td th:unless="${funcionario.manager}">Funcionario</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal: Cadastrar Funcionário -->
+  <div class="modal fade" id="cadModal" tabindex="-1" aria-labelledby="cadModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="cadModalLabel">Cadastrar Funcionário</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form th:action="@{/worker/funcionarios}" th:method="post" th:object="${cadFuncionario}">
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="name" class="form-label">Nome</label>
+              <input type="text" class="form-control" id="name" th:field="*{name}" required>
+            </div>
+            <div class="mb-3">
+              <label for="cpf" class="form-label">CPF</label>
+              <input type="text" class="form-control" id="cpf" th:field="*{cpf}" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}">
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" th:field="*{email}" required>
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Senha</label>
+              <input type="password" class="form-control" id="password" th:field="*{password}" required>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="manager" th:field="*{manager}">
+              <label class="form-check-label" for="manager">Gerente</label>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            <button type="submit" class="btn btn-light-green text-light">Salvar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const worker = JSON.parse(localStorage.getItem("loggedw"));
+    const profile = document.getElementById("worker");
+    profile.textContent = worker.name;
+    
+    document.getElementById('produtos').classList.add('link-dark');
+    let nav_pill_funcionarios = document.getElementById('funcionarios');
+    if (worker.manager == true) {
+      nav_pill_funcionarios.classList.add('link-light', 'bg-dark-green');
+    } else {
+      nav_pill_funcionarios.style.display = 'none';
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

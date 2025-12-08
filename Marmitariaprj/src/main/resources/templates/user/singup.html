@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/custom.css">
+  <link rel="stylesheet" href="/css/style.css" th:href="@{/css/style.css}">
+  <link rel="stylesheet" href="/css/custom.css" th:href="@{/css/custom.css}">
   <title>Cadastro</title>
 </head>
 <body>
   <div class="d-grid bg-dark-green" style=" height: 100dvh; place-content: center;">
     <div class="rounded-4 h-auto window" style="width: 25dvw; ">
-      <form class="m-3 mb-0 d-grid" method="POST" action="/cadastro" th:object="${client}">
+      <form class="m-3 mb-0 d-grid" method="POST" action="/user/cadastro" th:object="${client}">
         <div class="mb-3">
           <label for="name" class="form-label">Nome</label>
           <input id="name" type="text" class="form-control" name="name" th:value="${client.name}">
@@ -31,7 +31,7 @@
         <button type="submit" class="btn btn-light-green border-0 my-1 text-light ">Cadastrar</button>
       </form>
       <div class="d-flex justify-content-center mb-2">
-        <a class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover link-dark" href="/login">Já tem uma Conta?</a>
+        <a class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover link-dark" href="login">Já tem uma Conta?</a>
       </div>
     </div>
   </div>

@@ -12,7 +12,7 @@ function verify_acount() {
     adress: null
   };
   console.log(JSON.stringify(to_verify));
-  fetch("/login", {
+  fetch("/user/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -25,7 +25,7 @@ function verify_acount() {
     if(data != null){
       console.log("Client: ", JSON.stringify(data));
       localStorage.setItem("logged", JSON.stringify(data));
-      window.location.href = "/produtos"
+      window.location.href = "produtos"
     }else{
       document.getElementById("clientDontExist").style.display = 'block';
     }
@@ -47,7 +47,7 @@ function verify_worker() {
     manager: null
   };
   console.log(JSON.stringify(to_verify));
-  fetch("/logWorker", {
+  fetch("/worker/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -58,9 +58,9 @@ function verify_worker() {
   .then(data => {
     console.log(typeof data);
     if(data != null){
-      console.log("Client: ", JSON.stringify(data));
-      localStorage.setItem("logged", JSON.stringify(data));
-      window.location.href = "/produtos"
+      console.log("worker: ", JSON.stringify(data));
+      localStorage.setItem("loggedw", JSON.stringify(data));
+      window.location.href = "produtos"
     }else{
       document.getElementById("clientDontExist").style.display = 'block';
     }

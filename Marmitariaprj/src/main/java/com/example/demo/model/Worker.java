@@ -15,13 +15,13 @@ public class Worker {
   private String name;
   private String email;
   private String password;
-  private int cpf;
+  private String cpf;
   private boolean manager;
 
     public Worker() {
     }
 
-    public Worker(int cpf, String email, long id, boolean manager, String name, String password) {
+    public Worker(String cpf, String email, long id, boolean manager, String name, String password) {
         this.cpf = cpf;
         this.email = email;
         this.id = id;
@@ -62,11 +62,11 @@ public class Worker {
       this.password = password;
     }
 
-    public int getCpf() {
+    public String getCpf() {
       return cpf;
     }
 
-    public void setCpf(int cpf) {
+    public void setCpf(String cpf) {
       this.cpf = cpf;
     }
 

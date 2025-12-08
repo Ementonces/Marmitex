@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -13,6 +14,7 @@ import com.example.demo.model.Client;
 import com.example.demo.service.ClientService;
 
 @Controller
+@RequestMapping("/user")
 public class ClientController{
   
     private final ClientService clientService;
@@ -20,15 +22,10 @@ public class ClientController{
   public ClientController(ClientService clientService) {
     this.clientService = clientService;
   }
-
-  @GetMapping("/")
-  public String index(){
-    return "index";
-  }
   
   @GetMapping("/cadastro")
   public ModelAndView create(){
-    ModelAndView mv = new ModelAndView("singup");
+    ModelAndView mv = new ModelAndView("user/singup");
     mv.addObject("client", new Client());
     return mv;
   }
@@ -42,12 +39,12 @@ public class ClientController{
         }
     }
     clientService.save(client);
-    return "redirect:/login";
+    return "redirect:/user/login";
   }
 
   @GetMapping("/login")
   public ModelAndView loginpage(){
-    ModelAndView mv = new ModelAndView("login");
+    ModelAndView mv = new ModelAndView("user/login");
     mv.addObject("client",new Client());
     return mv;
   }
@@ -68,12 +65,12 @@ public class ClientController{
 
   @GetMapping("/logout")
   public String logout(){
-    return "redirect:/login";
+    return "redirect:/user/login";
   } 
   
   @GetMapping("/carrinho")
   public ModelAndView cart(){
-    ModelAndView mv = new ModelAndView("carrinho");
+    ModelAndView mv = new ModelAndView("user/carrinho");
     return mv;
   }
 }
